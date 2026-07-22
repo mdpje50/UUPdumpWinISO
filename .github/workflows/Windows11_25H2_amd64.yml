@@ -10,7 +10,9 @@ env:
 jobs:
   Windows11_25H2_amd64:
     runs-on: windows-latest
-
+    permissions:
+      contents: write  # 👈 添加这一行，允许创建 Release
+      actions: read    # 可选，读取 artifacts 需要
     steps:
 
     # 检出本仓库
@@ -49,5 +51,5 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
-        release_name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
+        name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
         files: ${{env.FILE_NAME}}-${{env.Build_VERSION}}.7z*
